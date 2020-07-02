@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividad Triangulo de Sierpinski</title>
+    <script src="fractal.js"></script>
+</head>
+
+<body onload="draw()">
+    <h1>Actividad 1 - A01114097 Julian Herrera H</h1>
+
+    <div>
+        <h3 style="margin: 5px 5px 5px 0px;">Numero de recursiones</h3>
+        <input id="slider" type="range" min="0" max="9" step="1" value="0" style="width:500px"
+            oninput="validateInput(this.value)">
+        <div id="sliderValue">Valor: 0</div>
+    </div>
+    <br>
+    <div>
+        <canvas id="htmlCanvas" width="800" height="800"
+            style="border: black; border-style: solid; border-width: 2px;"></canvas>
+    </div>
+    <div id="mousePosition">
+        Mouse position: ()
+    </div>
+
+</body>
+
+
+</html>
