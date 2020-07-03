@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paint</title>
+    <script src="paint.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            background-color: #373737;
+            font-family: 'Trebuchet MS';
+            color: white;
+        }
+
+        canvas {
+            display: inline-block;
+            background-color: white;
+        }
+
+        button {
+            border-style: none;
+            font-size: 17px;
+        }
+
+        .options {
+            max-height: 800px;
+            width: 200px;
+            display: inline-block;
+            color: white;
+            padding: 5px;
+            position: fixed;
+            top: 0;
+
+        }
+
+        .colorPicker {
+            max-width: 150px;
+        }
+
+        .colorButton {
+            width: 25px;
+            height: 25px;
+            display: inline-block;
+            border-style: none;
+            border-radius: 50%;
+        }
+
+        .colorButtonB {
+            width: 25px;
+            height: 25px;
+            display: inline-block;
+            border-style: none;
+            border-radius: 50%;
+        }
+    </style>
+
+</head>
+
+<body onload="main()">
+
+    <canvas id="paintCanvas" width="900px" height="800px"></canvas>
+
+    <div class="options" id="options">
+        <h2>Opciones</h2>
+        <hr>
+        <p id="line-width-text">Ancho de Linea: (1)</p>
+        <input id="width-slider" type="range" min="1" max="6" step="1" value="1">
+        <hr>
+        <p>Color Linea:</p>
+        <div class="colorPicker" id="color-picker">
+            <button class="colorButton" value="black" style="background-color: black"></button>
+            <button class="colorButton" value="white" style="background-color: white"></button>
+            <button class="colorButton" value="blue" style="background-color: blue;"></button>
+            <button class="colorButton" value="red" style="background-color: red;"></button>
+            <button class="colorButton" value="green" style="background-color: green;"></button>
+            <button class="colorButton" value="gray" style="background-color: gray;"></button>
+            <button class="colorButton" value="yellow" style="background-color: yellow;"></button>
+            <button class="colorButton" value="pink" style="background-color: pink;"></button>
+            <button class="colorButton" value="purple" style="background-color: purple;"></button>
+            <button class="colorButton" value="cyan" style="background-color: cyan;"></button>
+        </div>
+        <p>Color Fondo:</p>
+        <div class="colorPicker" id="color-picker2">
+            <button class="colorButtonB" value="black" style="background-color: black"></button>
+            <button class="colorButtonB" value="white" style="background-color: white"></button>
+            <button class="colorButtonB" value="blue" style="background-color: blue;"></button>
+            <button class="colorButtonB" value="red" style="background-color: red;"></button>
+            <button class="colorButtonB" value="green" style="background-color: green;"></button>
+            <button class="colorButtonB" value="gray" style="background-color: gray;"></button>
+            <button class="colorButtonB" value="yellow" style="background-color: yellow;"></button>
+            <button class="colorButtonB" value="pink" style="background-color: pink;"></button>
+            <button class="colorButton" value="purple" style="background-color: purple;"></button>
+            <button class="colorButtonB" cyan="cyan" style="background-color: cyan;"></button>
+        </div>
+        <hr>
+        <button id="clear-button" onclick="clearCanvas()" style="color: white; background-color:#1b1b1b">Limpiar
+            Canvas</button>
+    </div>
+
+
+    <div id="mousePosition">
+    </div>
+
+</body>
+
+</html>

@@ -1,3 +1,9 @@
+/*
+    Julian Herrera, A01114097
+    Graficas Computacionales
+*/
+
+
 let ctx = null
 let canvas = null
 // Score object
