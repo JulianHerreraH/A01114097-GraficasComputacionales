@@ -1,0 +1,40 @@
+<html>
+
+<head>
+    <title>Tarea 1</title>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+    <script src="../../libs/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+    <script src="../../libs/gl-matrix/gl-matrix.js"></script>
+    <script src="tarea1.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(
+            function () {
+                let canvas = document.getElementById("webglcanvas")
+                let gl = initWebGL(canvas)
+
+                initViewport(gl, canvas)
+                initGL(canvas)
+
+                let pyramid = createPyramid(gl, [-4.5, 0, -2], [0.1, 1.0, 0.2])
+                let dodecahedron = createDodecahedron(gl, [0, 0, -2], [[-0.4, 1.0, 0.1], [0.0, 1.0, 0.0]])
+                let octahedron = createOctahedron(gl, [4.5, 0, -2], [0.0, 1.0, 0.0])
+
+                initShader(gl)
+                run(gl, [pyramid, dodecahedron, octahedron])
+            }
+        );
+
+    </script>
+
+</head>
+
+<body>
+    <h1>Tarea 1 - A01114097, Carlos Julian Herrera H</h1>
+    <canvas id="webglcanvas" style="border: none;" width="800" height="600">
+    </canvas>
+
+</body>
+
+</html>
