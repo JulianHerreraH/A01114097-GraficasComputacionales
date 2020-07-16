@@ -1,0 +1,82 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Actividad Three.js</title>
+
+    <link rel="stylesheet" href="../../libs/jquery-ui/jquery-ui.css" />
+    <link rel="stylesheet" href="../../libs/bootstrap/bootstrap.css" />
+    <link rel="stylesheet" href="./css/scene.css" />
+
+    <script src="../../libs/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+    <script src="../../libs/jquery-ui/jquery-ui.js"></script>
+    <script src="../../libs/three.js/three.js"></script>
+
+    <script src="handlers.js"></script>
+    <script src="scene.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(
+            function () {
+
+                $("#slider").slider({ min: 0.1, max: 2, value: 1, step: 0.01, animate: false });
+
+                let canvas = document.getElementById("webglcanvas");
+
+                // create the scene
+                createScene(canvas);
+
+                // Run the run loop
+                run();
+            }
+        );
+
+    </script>
+
+</head>
+
+<body>
+    <div class="container-fluid">
+
+        <h1 class="m-2">Actividad Three JS </h1>
+        <div class="row">
+            <div class="col-10">
+                <canvas id="webglcanvas" class="w-100"></canvas>
+                <h6 id="title">Three.js Scene Graph/Transform Hierarchy</h6>
+                <p id="prompt">
+                    Drag the mouse to rotate the scene<br>Drag the slider to scale.
+                </p>
+                <div id="status">
+                    <p id="rotation">rotation: 0,0,0</p>
+                    <p id="scale">scale: 1</p>
+                </div>
+                <div id="slider" class="my-2"></div>
+
+            </div>
+
+
+
+            <div class="col-2">
+                <h4>Add Objects to the Scene</h4>
+                <div id="limitAlert" class="alert alert-warning" role="alert" style="display: none;">
+                    Object limit reached
+                </div>
+
+                <div class="btn-group-vertical">
+                    <button id="addButton" onclick="addObject()" class="btn btn-primary btn-lg">Add Object</button>
+                    <button id="satelliteButton" onclick="addSatellite()" class="btn btn-success btn-lg">Add
+                        Satellite</button>
+                    <button id="clearButton" onclick="clearCanvas()" class="btn btn-danger btn-lg"
+                        disabled>Clear</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>
