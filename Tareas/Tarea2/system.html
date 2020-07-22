@@ -1,0 +1,119 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Tarea 2 - Sistema Solar</title>
+
+	<link rel="stylesheet" href="../../libs/jquery-ui/jquery-ui.css" />
+	<link rel="stylesheet" href="../../libs/bootstrap/bootstrap.css" />
+	<link rel="stylesheet" href="./styles.css" />
+
+	<script src="../../libs/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+	<script src="../../libs/jquery-ui/jquery-ui.js"></script>
+	<script src="../../libs/three.js/three.js"></script>
+	<script src="../../libs/three.js/controls/OrbitControls.js"></script>
+
+	<script src="handlers.js"></script>
+	<script src="main.js"></script>
+
+	<script id="fragmentShader" type="x-shader/x-fragment">
+        				uniform float time;
+        
+        				uniform float fogDensity;
+        				uniform vec3 fogColor;
+        
+        				// Textura de transparencia
+        				uniform sampler2D texture1;
+        
+        				// Textura de lava
+        				uniform sampler2D texture2;
+        
+        				varying vec2 vUv;
+        
+        				void main( void ) {
+        
+        					vec2 T1 = vUv + vec2(1.5,1.5) * time * 0.06;
+        					vec2 T2 = vUv + vec2(-1.0,0.0) * time * 0.03;
+        
+        					vec4 noise = texture2D( texture1, vUv );
+        					
+        					T1.x += noise.a * 1.5;
+        					T1.y += noise.a* 1.5;
+        					
+        					T2.x -= noise.r * 0.85;
+        					T2.y += noise.g * 0.85;
+        					
+        					vec4 color = texture2D( texture2, T2 * 2.0 );
+        					float alpha = texture2D(texture1, T1 ).a * 0.5;
+        
+        					// COmbine the textures
+        					vec4 tempColor = color + vec4(alpha, alpha, alpha, 1.0) * 3.0 * color;
+        
+        					if(tempColor.r > 2.0) { // Secciones en las que rojo se pasa
+        
+        						tempColor.gb += 0.55;
+        						tempColor.r -= 0.85;
+        
+        					}
+        					if(tempColor.g > 1.0) { 
+        						
+        						tempColor.r -= 0.55;
+        						tempColor.b += 0.55;
+        
+        					}
+        					
+        					gl_FragColor = tempColor * 1.1;
+        				}
+        		</script>
+
+	<script id="vertexShader" type="x-shader/x-vertex">
+        				uniform vec2 uvScale;
+        				varying vec2 vUv;
+        
+        				void main()
+        				{
+        					vUv = uvScale * uv;
+        					vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+        					gl_Position = projectionMatrix * mvPosition;
+        				}
+    </script>
+
+	<script type="text/javascript">
+
+		$(document).ready(
+			function () {
+
+				let canvas = document.getElementById("webglcanvas");
+
+				// create the scene
+				createScene(canvas);
+
+				// Run the run loop
+
+			}
+		);
+
+	</script>
+
+</head>
+
+<body>
+	<div class="text p-2">
+		<h2 class="display-4">Solar System - ThreeJS</h2>
+		<p>Move around with mouse/trackpad</p>
+		<p>Use scroll wheel to zoom</p>
+
+
+	</div>
+	<canvas id="webglcanvas" class="w-100 h-100"></canvas>
+
+	<div id="loading">
+		<h6>Loading...</h6>
+		<div class="progressB">
+			<div class="progressbar"></div>
+		</div>
+	</div>
+
+</body>
+
+</html>
