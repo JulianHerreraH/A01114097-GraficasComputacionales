@@ -8,7 +8,6 @@
 let renderer = null,
     scene = null,
     camera = null,
-    gCanvas = null,
     controls = null,
     clock = null
 
@@ -29,7 +28,7 @@ function animate() {
 
     uniforms["time"].value += 0.2 * delta
 
-    sunObject.rotation.y += 0.005
+    sunObject.rotation.y += 0.0015
 
     planets.forEach((planet) => {
         planet.obj.rotation.y += planet.orbitSpeed
@@ -381,6 +380,22 @@ function initMars(texture) {
     sunObject.add(pivotPoint)
     pivotPoint.add(marsMesh)
 
+    // Planet's pivot for the moon
+    let marsPivot = new THREE.Object3D()
+    marsMesh.add(marsPivot)
+
+    // Random moons
+    let moonMat = new THREE.MeshPhongMaterial({ color: 0xb0bec5 })
+    for (let i = 0; i <= 1; i++) {
+
+        let moon = createMoon(0.05, moonMat)
+        moon.position.x = getRandomFloat(0.5, 0.5)
+        moon.position.z = getRandomFloat(0.1, 0.7)
+        marsPivot.add(moon)
+    }
+    moons.push(marsPivot)
+
+
     // Draw the orbit
     let orbit = createOrbit(distance, 0xFF3838)
     sunObject.add(orbit)
@@ -498,7 +513,8 @@ function initJupiter(jupiterTexture, ioTexture, europaTexture, ganymedeTexture, 
     {
         let material = new THREE.MeshPhongMaterial({ map: ioTexture })
         let ioMoon = createMoon(0.145, material)
-        ioMoon.position.x = 1.9
+        ioMoon.position.x = -1.9
+        ioMoon.position.z = 0.5
 
         moons.push(ioMoon)
 
@@ -509,7 +525,9 @@ function initJupiter(jupiterTexture, ioTexture, europaTexture, ganymedeTexture, 
     {
         let material = new THREE.MeshPhongMaterial({ map: europaTexture })
         let europaMoon = createMoon(0.13, material)
-        europaMoon.position.x = 2.4
+        europaMoon.position.x = -0.8
+        //europaMoon.position.y = 0.7
+        europaMoon.position.z = 1.9
 
         moons.push(europaMoon)
 
@@ -520,7 +538,8 @@ function initJupiter(jupiterTexture, ioTexture, europaTexture, ganymedeTexture, 
     {
         let material = new THREE.MeshPhongMaterial({ map: ganymedeTexture })
         let ganymedeMoon = createMoon(0.19, material)
-        ganymedeMoon.position.x = 2.8
+        ganymedeMoon.position.x = 1.5
+        ganymedeMoon.position.z = -1.0
 
         moons.push(ganymedeMoon)
 
@@ -531,7 +550,8 @@ function initJupiter(jupiterTexture, ioTexture, europaTexture, ganymedeTexture, 
     {
         let material = new THREE.MeshPhongMaterial({ map: callistoTexture })
         let callistoMoon = createMoon(0.175, material)
-        callistoMoon.position.x = 3.2
+        callistoMoon.position.x = 2.0
+        callistoMoon.position.z = 1.35
 
         moons.push(callistoMoon)
 
@@ -642,6 +662,21 @@ function initUranus(texture) {
     sunObject.add(pivotPoint)
     pivotPoint.add(uranusMesh)
 
+    // Planet's pivot for the moon
+    let uranusPivot = new THREE.Object3D()
+    uranusMesh.add(uranusPivot)
+
+    // Random moons, for Uranus, the moons orbit vertically
+    let moonMat = new THREE.MeshPhongMaterial({ color: 0xb0bec5 })
+    for (let i = 0; i < 4; i++) {
+
+        let moon = createMoon(0.09, moonMat)
+        moon.position.x = getRandomFloat(1.0, 2.0)
+        moon.position.z = getRandomFloat(-2.0, 1.5)
+        uranusPivot.add(moon)
+    }
+    moons.push(uranusPivot)
+
     // Draw the orbit
     let orbit = createOrbit(distance, 0x03D1F1)
     sunObject.add(orbit)
@@ -682,6 +717,21 @@ function initNeptune(texture) {
     // Draw the orbit
     let orbit = createOrbit(distance, 0x846AA8)
     sunObject.add(orbit)
+
+    // Planet's pivot for the moon
+    let neptunePivot = new THREE.Object3D()
+    neptuneMesh.add(neptunePivot)
+
+    // Random moons
+    let moonMat = new THREE.MeshPhongMaterial({ color: 0xd7ccc8 })
+    for (let i = 0; i < 3; i++) {
+
+        let moon = createMoon(0.12, moonMat)
+        moon.position.x = getRandomFloat(1.0, 2.0)
+        moon.position.z = getRandomFloat(-2.0, 1.5)
+        neptunePivot.add(moon)
+    }
+    moons.push(neptunePivot)
 
     // Planet's object with its data
     let neptune = {
