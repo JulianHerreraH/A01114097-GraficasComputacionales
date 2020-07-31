@@ -182,7 +182,7 @@ class Environment {
             const customTransform = `
         vec3 transformed = vec3(position);
         transformed.x = position.x + sin(position.y*10.0 + time*10.0)*1.2;
-        transformed.y = position.y + sin(position.y*5.0 + time*10.0)*5.0;
+        transformed.y = position.y + sin(position.y*15.0 + time*10.0)*13.0;
         `
             shader.vertexShader =
                 shader.vertexShader.replace(token, customTransform)
